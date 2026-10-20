@@ -1,0 +1,148 @@
+@use 'sass:color';
+@use './variables' as *;
+
+.wrapper {
+  width: 550px;
+  margin: 2rem auto;
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.panel {
+  margin: 2rem;
+  width: 7.25rem;
+  height: 7.25rem;
+  display: inline-block;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+
+  .shift {
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: shade($panel-bg, 65%);
+    transform: rotate(45deg);
+    box-shadow: 3px 3px 15px shade($panel-bg, 35%);
+    transition: all 250ms ease-in-out;
+
+    a {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .trigger {
+    transform: rotate3d(2, -2, 0, 40deg);
+    transform-style: preserve-3d;
+    box-shadow: inset 5px 5px 5px rgba(0, 0, 0, 0.9);
+    text-align: center;
+    text-decoration: none;
+    transition: all 250ms ease-in-out;
+
+    // the number (a heading in the original; a span here, since six h1s make a poor page outline)
+    .title {
+      position: absolute;
+      font-family: 'Arvo', serif;
+      font-size: 2em;
+      font-weight: 400;
+      width: 100%;
+      line-height: 3.5rem;
+      white-space: nowrap;
+      display: block;
+      top: 1.5rem;
+      margin: 0.5rem auto;
+      z-index: 10;
+      color: white;
+      transform: rotate(-45deg);
+      transition: color 250ms ease-in-out;
+    }
+  }
+
+  .surface {
+    width: 100%;
+    height: 100%;
+    display: block;
+    z-index: 1;
+    background-color: $panel-bg;
+    transform: translate(0.125rem, 0.125rem);
+    transition: all 250ms ease-in-out;
+  }
+
+  .edge {
+    position: absolute;
+    z-index: -1;
+    pointer-events: none;
+    transition: all 250ms ease-in-out;
+
+    &.left {
+      border-left: 7.35rem solid transparent;
+      border-right: 1.35rem solid transparent;
+      border-bottom: 1rem solid shade($panel-bg, 50%);
+      bottom: -0.7rem;
+      transform: rotate(8deg);
+      z-index: -1;
+    }
+
+    &.right {
+      border-top: 7.35rem solid transparent;
+      border-bottom: 1.35rem solid transparent;
+      border-right: 1rem solid shade($panel-bg, 30%);
+      right: -0.7rem;
+      transform: rotate(-8deg);
+      z-index: -1;
+    }
+  }
+
+  // hovering or keyboard focus: the panel settles flat (the original used hover only, and removed the focus outline)
+  &:hover,
+  &:focus-within {
+    .shift {
+      box-shadow: 1px 1px 5px color.change(shade($panel-bg, 35%), $alpha: 0.5);
+    }
+
+    .trigger {
+      transform: rotate3d(0, 0, 0, 45deg);
+      box-shadow: inset 0 0 0 rgba(0, 0, 0, 0);
+    }
+
+    .surface {
+      transform: translate(0, 0);
+    }
+
+    .edge {
+      &.left,
+      &.right {
+        transform: rotate(0deg);
+      }
+
+      &.left {
+        border-left-width: 6.25rem;
+        border-right-width: 1rem;
+        bottom: 0;
+      }
+
+      &.right {
+        border-top-width: 6.25rem;
+        border-bottom-width: 1rem;
+        right: 0;
+      }
+    }
+
+    .title {
+      color: #ccc;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .panel,
+  .panel * {
+    transition: none;
+  }
+}

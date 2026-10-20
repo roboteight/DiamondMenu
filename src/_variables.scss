@@ -1,0 +1,10 @@
+@use 'sass:color';
+
+$primary-color: white;
+$highlight: tomato;
+$panel-bg: $highlight;
+
+/// The colour made darker by `$amount` (the same as Sass's deprecated darken()).
+@function shade($colour, $amount) {
+  @return color.adjust($colour, $lightness: -$amount);
+}

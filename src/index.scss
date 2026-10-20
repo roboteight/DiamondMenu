@@ -1,0 +1,25 @@
+@use './variables' as *;
+
+* {
+  outline: none;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  font-size: 1em;
+  color: $primary-color;
+  background: $panel-bg;
+  font-family: 'Arvo', serif;
+
+  a {
+    text-decoration: none;
+    color: #f9f9f9;
+
+    &:hover {
+      text-decoration: none;
+      color: #f36;
+    }
+  }
+}
