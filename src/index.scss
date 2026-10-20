@@ -1,25 +1,28 @@
-@use './variables' as *;
+:root {
+  --primary-color: white;
+  --highlight: tomato;
+  --panel-bg: var(--highlight);
+}
 
-* {
-  outline: none;
+*,
+::before,
+::after {
   margin: 0;
   padding: 0;
 }
 
 html,
 body {
-  font-size: 1em;
-  color: $primary-color;
-  background: $panel-bg;
-  font-family: 'Arvo', serif;
+  color: var(--primary-color);
+  background: var(--panel-bg);
+  font-family: Arvo, serif;
+}
 
-  a {
-    text-decoration: none;
-    color: #f9f9f9;
+a {
+  text-decoration: none;
+  color: #f9f9f9;
 
-    &:hover {
-      text-decoration: none;
-      color: #f36;
-    }
+  &:hover {
+    color: #f36;
   }
 }
